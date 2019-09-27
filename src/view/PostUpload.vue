@@ -43,11 +43,11 @@ export default {
         UploadFile(e) {
             var reader = new FileReader();
             reader.onload = (e) => {
-                var uploadData = e.target.result;                
+                var uploadData = e.target.result;
                 this.uploadPosts(uploadData);
                 this.uploadFileSuccess = uploadData ? true: false;
-            };                       
-            reader.readAsDataURL(e.raw); 
+            };
+            reader.readAsDataURL(e.raw);
         },
         SuccessUpload() {
             this.uploadFileSuccess = false;

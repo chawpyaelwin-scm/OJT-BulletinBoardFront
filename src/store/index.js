@@ -10,7 +10,7 @@ Vue.use(Vuex);
 Vue.use(VueSessionStorage);
 
 /**
- *eslint-disable no-new
+ * eslint-disable no-new
  */
 export const store = new Vuex.Store({
   modules: {

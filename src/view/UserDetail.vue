@@ -88,8 +88,9 @@ export default {
     ...mapGetters("user", {user: "user"}),
     },
     methods: {
-        ...mapActions("user", ["fetchData","resetState"]), 
+        ...mapActions("user", ["fetchData","resetState"]),
         onSubmit() {
+          //should be createUser
             this.userCreation();
         },
         cancelPost() {
@@ -105,7 +106,7 @@ export default {
         EditUserInfo(userId) {
             if(userId) {
                 router.push("/user/update/"+ userId);
-            } 
+            }
         }
     }
 }
@@ -121,7 +122,7 @@ export default {
 }
 .UserDetail-Header {
     text-align: center;
-    margin-bottom: 2rem; 
+    margin-bottom: 2rem;
 }
 .UserDetail-Container .el-form-item__label {
     font-size: 18px !important;

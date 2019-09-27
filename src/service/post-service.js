@@ -1,7 +1,7 @@
 import Axios from "axios";
 
-export const postService = { 
-  getPostList,  
+export const postService = {
+  getPostList,
   getPost,
   getPostByTitle,
   createPost,
@@ -13,10 +13,10 @@ export const postService = {
 
 async function getPostList(searchData) {
   if(searchData !== undefined) {
-    var title = searchData.title;   
+    var title = searchData.title;
     var createdUser = searchData.createdUser;
   }
- 
+
   const result = await Axios({
     method: "GET",
     url: process.env.VUE_APP_ROOT_API + "/post",
@@ -26,14 +26,14 @@ async function getPostList(searchData) {
     Authorization: localStorage.getItem("token")
     }
   });
-  
-  return result.data.body.posts;    
+
+  return result.data.body.posts;
 }
 
 /**
  * get a post
  */
-async function getPost(id) {  
+async function getPost(id) {
   const result = await Axios({
       method: "GET",
       url: process.env.VUE_APP_ROOT_API + "/post/" + id,
@@ -42,14 +42,14 @@ async function getPost(id) {
           Authorization: localStorage.getItem("token")
       }
   });
-  
+
   return result.data.body.post;
 }
 
 /**
  * get a post by title
  */
-async function getPostByTitle(title) {  
+async function getPostByTitle(title) {
   const result = await Axios({
       method: "GET",
       url: process.env.VUE_APP_ROOT_API + "/post/title",
@@ -59,15 +59,15 @@ async function getPostByTitle(title) {
           Authorization: localStorage.getItem("token")
       }
   });
-  
+
   return result.data.body.post;
 }
 
 /**
  * Create Post
  */
-function createPost(post) {    
-  const title = post.title;    
+function createPost(post) {
+  const title = post.title;
   const description = post.description;
   const status = post.status;
     const result = Axios({
@@ -86,7 +86,7 @@ function createPost(post) {
 /**
  * Upload Post
  */
-function uploadPost(upload) {          
+function uploadPost(upload) {
   const result = Axios({
     method: "POST",
     url: process.env.VUE_APP_ROOT_API + "/post/upload",
@@ -121,11 +121,11 @@ function deletePost(id) {
  * Update Post
  */
 function updatePost(post) {
-  const title = post.title;    
+  const title = post.title;
   const description = post.description;
   const status = post.status;
   const id= post.id;
-  
+
   const result = Axios({
     method: "PUT",
     url: process.env.VUE_APP_ROOT_API + "/post/update/"+ id,
@@ -136,7 +136,7 @@ function updatePost(post) {
     }
   });
 
-  return result;  
+  return result;
 }
 
 function downloadPost() {
@@ -149,6 +149,6 @@ function downloadPost() {
     }
   });
 
-  return result;    
+  return result;
 }
 

@@ -66,7 +66,7 @@
         </el-card>
       </el-col>
     </el-row>
-    <div class="None-Post" v-if="postData.length == 0 && role === 'user'">
+    <div class="None-Post" v-if="postData.length === 0 && role === 'user'">
       <h1>Nothing To Show!!!!</h1>
     </div>
     <el-table
@@ -108,6 +108,7 @@
       <el-table-column label="Comment">
         <template slot-scope="scope">
           <el-badge :value="12" class="item">
+            <!-- change postComment to commented -->
               <el-button type="secondary" @click="postComment(scope.row.id)">Comment</el-button>
           </el-badge>
         </template>
@@ -167,6 +168,7 @@
         <el-button type="primary" @click="DownloadConfirm()">OK</el-button>
       </span>
     </el-dialog>
+    <!-- change downloadSuccessDialogShow to showSuccessDialog -->
     <el-dialog class="DownloadDialog" :visible.sync="downloadSuccessDialogShow" width="30%" center>
       <div>Excel File Download Success!</div>
       <div>File Name: {{excelFileName}}</div>

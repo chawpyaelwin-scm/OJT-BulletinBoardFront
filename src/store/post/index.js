@@ -14,7 +14,7 @@ function initialState() {
       description: '',
       status: '',
     },
-  }; 
+  };
 }
 
 /**
@@ -33,7 +33,7 @@ const actions = {
   async getPostList({ commit }, searchData ) {
     const users = await userService.getUserList();
       postService.getPostList(searchData).then(
-        posts => {   
+        posts => {
           var date, year, month, monthData, dt, day, createdAt;
           for(var index = 0; index < posts.length; index++) {
             date = new Date(posts[index].created_at);
@@ -43,15 +43,15 @@ const actions = {
             dt = date.getDate();
             day = dt > 9 ? dt : "0"+dt;
             createdAt = year+"/"+monthData+"/"+day;
-            posts[index].created_at = createdAt;      
+            posts[index].created_at = createdAt;
             if(users) {
               for(var userIndex = 0; userIndex < users.length; userIndex++) {
                 if(posts[index].created_user_id === users[userIndex].id) {
                   posts[index].created_user_id = users[userIndex].name;
                 }
               }
-            }    
-          } 
+            }
+          }
           commit("postListSuccess", posts);
         }
       );
@@ -59,56 +59,56 @@ const actions = {
 
   getPost({ commit }, id) {
     postService.getPost(id).then(
-      post => {          
-        commit("postSuccess", post); 
+      post => {
+        commit("postSuccess", post);
       }
     );
   },
 
   async downloadPosts({ commit }) {
     const downloadPost = await postService.downloadPost();
-    
+
     return downloadPost.data.body;
   },
 
-  deletedPost({ dispatch }, id) {        
+  deletedPost({ dispatch }, id) {
     postService.deletePost( id )
-    .then(post => {  
+    .then(post => {
       dispatch("getPostList");
-    }) 
-  }, 
+    })
+  },
 
-  postCreation({ dispatch,commit, state}) {        
+  postCreation({ dispatch,commit, state}) {
     postService.createPost(state.post)
-    .then(post => { 
-      commit("resetState");  
+    .then(post => {
+      commit("resetState");
       router.push("/post/postlist");
     },
-    error => {       
+    error => {
       var errorMessage = error.response.data.errors[0].message;
        console.log("Err...", errorMessage);
-    });         
+    });
   },
 
   uploadPosts({ commit, state }, uploadData) {
     postService.uploadPost(uploadData);
   },
 
-  updatePost({ dispatch,commit, state}) {    
+  updatePost({ dispatch,commit, state}) {
     postService.updatePost( state.post )
-      .then(post => { 
+      .then(post => {
         commit("resetState");
       },
       error => {
-        const errorMessage = error.response.data.errors[0].message; 
+        const errorMessage = error.response.data.errors[0].message;
         console.log("Err...", errorMessage);
       });
   },
 
-  fetchData({ commit }, id) {            
+  fetchData({ commit }, id) {
     postService.getPost(id).then(
-      post => {      
-        var createDate, year, month, monthData, dt, day, createdAt;     
+      post => {
+        var createDate, year, month, monthData, dt, day, createdAt;
         createDate = new Date(post.created_at);
         year = createDate.getFullYear();
         month = createDate.getMonth() + 1;
@@ -116,18 +116,18 @@ const actions = {
         dt = createDate.getDate();
         day = dt > 9 ? dt : "0"+dt;
         createdAt = year+"/"+monthData+"/"+day;
-        post.created_at = createdAt;      
-        userService.getUser(post.created_user_id).then(user => {          
+        post.created_at = createdAt;
+        userService.getUser(post.created_user_id).then(user => {
           post.created_user_id = user.name;
           post.status = post.status === "1" ? true : false;
-          commit("setItem", post);           
+          commit("setItem", post);
         })
-    })        
-  }, 
+    })
+  },
 
   getPostByTitle({ commit }, title) {
     postService.getPostByTitle(title).then(
-      post => {                  
+      post => {
         // commit("postListSuccess", post);
       }
     )
@@ -148,9 +148,9 @@ const mutations = {
     state.post = post;
   },
   setItem(state, post) {
-    state.post.id = post.id; 
+    state.post.id = post.id;
     state.post.title = post.title;
-    state.post.description = post.description;  
+    state.post.description = post.description;
     state.post.status = post.status;
     state.post.created_user_id = post.created_user_id;
     state.post.created_at = post.created_at;

@@ -19,7 +19,7 @@ Vue.component("font-awesome-icon", FontAwesomeIcon);
 
 // Vue.use(DotEnv);
 Vue.use(VeeValidate, { inject: true, fieldsBagName: 'inputs' } );
-
+//comment shoud be more understandable
 /**
  * eslint-disable no-new
  */

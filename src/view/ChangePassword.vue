@@ -76,7 +76,7 @@ export default {
               this.OldPasswordErrMsgShow = false;
               this.PasswordSuccessDialogShow = true;
             }
-          })                    
+          })
         }
       });
     },

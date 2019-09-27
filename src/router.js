@@ -17,7 +17,7 @@ const user = localStorage.getItem("user");
 const role = localStorage.getItem("role");
 
 export const router = new Router({
-    mode: "hash", 
+    mode: "hash",
     linkActiveClass: "open active",
     scrollBehavior: () => ({ y: 0 }),
     routes: [
@@ -54,7 +54,7 @@ export const router = new Router({
                   return c("router-view");
               }
             },
-            children: [       
+            children: [
               {
                 path: "/post/postlist",
                 name: "Post List",
@@ -90,7 +90,7 @@ export const router = new Router({
                   return c("router-view");
               }
           },
-          children: [       
+          children: [
             {
               path: "/user/userlist",
               name: "User List",
@@ -128,7 +128,7 @@ export const router = new Router({
 
 
 router.beforeEach((to, from, next) => {
-    const token = localStorage.getItem("token");    
+    const token = localStorage.getItem("token");
     const user = localStorage.getItem("user");
     if(to.matched.some(record => record.meta.requiresAuth)){
       if (token && user) {

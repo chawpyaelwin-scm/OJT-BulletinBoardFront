@@ -13,8 +13,8 @@
         label="Email Address"
         prop="email"
         :rules="
-                [{   
-                    required: true, 
+                [{
+                    required: true,
                     message: 'Email is required.',
                     trigger: 'blur'
                 },
@@ -110,6 +110,7 @@ export default {
       };
       reader.readAsDataURL(e.raw);
     },
+    //change password is more convenience
     PasswordChange() {
       router.push("/user/changepassword");
     },

@@ -1,7 +1,7 @@
 import Axios from "axios";
 
 export const userService = {
-  login, 
+  login,
   getUser,
   getUserList,
   logout,
@@ -32,11 +32,12 @@ async function getUser(id) {
           Authorization: localStorage.getItem("token")
       }
   });
-  
+
   return result.data.body.user;
 }
 
 async function getUserList(searchData) {
+  //if(searchData)
   if(searchData !== undefined) {
     var name = searchData.name;
     var email = searchData.email;
@@ -61,9 +62,9 @@ function logout() {
     headers: {
       "content-type": "application/json",
       Authorization: localStorage.getItem("token")
-    }    
+    }
   });
-  return result;  
+  return result;
 }
 
 /**
@@ -85,7 +86,7 @@ function deleteUser(id) {
 
 
 function signup(user) {
-    const name = user.name;    
+    const name = user.name;
     const email = user.email;
     const password = user.password;
     const type = user.type;
@@ -93,22 +94,22 @@ function signup(user) {
     const dob = user.dob;
     const address = user.address;
     const profile = user.profile;
-    
+
     const result = Axios({
       method: "POST",
       url: process.env.VUE_APP_ROOT_API + "/user/add",
-      data: JSON.stringify({name,email,password,type,phone,dob,address,profile }),
+      data: JSON.stringify({name,email,password,type,phone,dob,address,profile }),//const user_info = {name,email,password,type,phone,dob,address,profile }
       headers: {
       "content-type": "application/json"
       }
-    });    
+    });
     return result;
  }
 
   /**
  * Update User Password
  */
-async function changePassword(oldPassword,newPassword,confirmPassword) {  
+async function changePassword(oldPassword,newPassword,confirmPassword) {
   const result = await Axios({
     method: "PUT",
     url: process.env.VUE_APP_ROOT_API + "/user/password",
@@ -118,7 +119,7 @@ async function changePassword(oldPassword,newPassword,confirmPassword) {
       Authorization: localStorage.getItem("token")
     }
   });
-  
+
   return result.data.body;
 }
 
@@ -126,7 +127,7 @@ async function changePassword(oldPassword,newPassword,confirmPassword) {
  * Update User
  */
 function updateUser(user) {
-  const name = user.name;    
+  const name = user.name;
   const email = user.email;
   const password = user.password;
   const type = user.type;
@@ -146,6 +147,6 @@ function updateUser(user) {
     }
   });
 
-  return result;  
+  return result;
 }
 

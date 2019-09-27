@@ -33,7 +33,7 @@ const actions = {
     async getCommentList({ commit }, searchData) {
         const users = await userService.getUserList();
         commentService.getCommentList(searchData).then(
-            comments => {                
+            comments => {
                 var date, year, month, monthData, dt, day, createdAt;
                 for (var index = 0; index < comments.length; index++) {
                     date = new Date(comments[index].created_at);
@@ -69,8 +69,8 @@ const actions = {
         const users = await userService.getUserList();
         setTimeout(() => {
             commentService.getCommentByPostId(postId).then(
-            comments => { 
-                state.commentOriginal = comments;               
+            comments => {
+                state.commentOriginal = comments;
                 var date, year, month, monthData, dt, day, createdAt;
                 for (var index = 0; index < comments.length; index++) {
                     date = new Date(comments[index].created_at);
@@ -158,7 +158,7 @@ const mutations = {
     setItem(state, commentData) {
         state.commentData.id = commentData.id;
         state.commentData.comment = commentData.comment;
-        state.commentData.postId = commentData.postId;        
+        state.commentData.postId = commentData.postId;
     },
     resetState(state) {
         state = Object.assign(state, initialState());

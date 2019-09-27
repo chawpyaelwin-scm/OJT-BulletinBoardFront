@@ -13,8 +13,8 @@
         label="Email Address"
         prop="email"
         :rules="
-                [{   
-                    required: true, 
+                [{
+                    required: true,
                     message: 'Email is required.',
                     trigger: 'blur'
                 },
@@ -113,6 +113,7 @@ export default {
     ...mapActions("user", ["userCreation", "resetState"]),
     onSubmit() {
       this.$refs["userCreateForm"].validate(valid => {
+        //careful short name
         this.ConfirmErrMsgShow =
           this.users.password != this.users.confirmPassword;
         if (valid && !this.ConfirmErrMsgShow) {
